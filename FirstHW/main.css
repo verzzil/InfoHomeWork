@@ -1,0 +1,81 @@
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 80vh;
+}
+#main {
+	width: 90%;
+	text-align: center;
+	font-family: cursive;
+}
+#formContainer {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+#queryString {
+	width: 70%;
+	padding: 10px;
+	font-size: 1.2em;
+	margin-bottom: 25px;
+	transition: all .4s ease-in-out;
+	-webkit-transition: all .4s ease-in-out;
+	-moz-transition: all .4s ease-in-out;
+	border: none;
+	box-shadow: 0 0 5px rgba(0,0,0,.4)
+}
+#queryString:hover {
+	box-shadow: 0 0 20px rgba(141, 219, 215, .7) !important;
+	border: none;
+}
+#queryString:focus {
+	box-shadow: 0 0 30px rgb(141, 219, 215) !important;
+	outline: none;
+}
+
+#formContainer>button {
+	display: flex;
+	flex-wrap: wrap;
+	width: 150px;
+	height: 150px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	/*filter: grayscale(100%);
+	-webkit-filter: grayscale(100%);
+	-moz-filter: grayscale(100%);
+	*/transition: all .4s ease-in; 
+	-webkit-transition: all .4s ease-in;
+	-moz-transition: all .4s ease-in;
+
+	border:none;
+	background: white;
+	box-shadow: 0 0 3px rgba(0,0,0,.2)
+}
+button {
+	outline: none;
+}
+#formContainer>button:hover {
+	transform: scale(1.2);
+	filter: none;
+	cursor: pointer;
+}
+#formContainer>button>img {
+	width: 130px;
+}
+.duckGo>img {
+	width: 110px !important;
+}
+
+#title {
+	font-size:3em;
+	transition: all .2s ease-in;
+	padding: 10px 40px;
+	border-radius: 10px;
+}
+
+data {
+	transition: all .2s ease-in;
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Searching service</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+	<div id="main">
+		<h1><span id="title">
+			<data id="first">A</data><data id="second">l</data><data id="third">l</data><data id="fourth">I</data><data id="fifth">n</data><data id="sixth">O</data><data id="seventh">n</data><data id="eighth">e</data></span>
+		</h1>
+		<form id="form" method="get" name="form" action="" onsubmit="submitForm(this);" onfocus="deleteRedStyle();">
+
+			<input type="text" id="queryString" name="" placeholder="Enter your request" autocomplete="off">
+
+			<div id="formContainer">
+				<button type="submit" class="google" value="Search in Google" formaction="https://www.google.com/search" onmouseenter="drawTitle(this)" onmouseleave="removeAllStyles()"><img src="images/google.png"></button>
+				<button type="submit" class="yandex" value="Search in Yandex" formaction="https://yandex.ru/search/" onmouseenter="drawTitle(this)" onmouseleave="removeAllStyles()"><img src="images/yandex.png"></button>
+				<button type="submit" class="mail" value="Search in Mail.ru" formaction="https://go.mail.ru/search" onmouseenter="drawTitle(this)" onmouseleave="removeAllStyles()"><img src="images/mailru.png"]></button>
+				<button type="submit" class="rambler" value="Search in Rambler" formaction="https://nova.rambler.ru/search" onmouseenter="drawTitle(this)" onmouseleave="removeAllStyles()"><img src="images/rambler.png"></button>
+				<button type="submit" class="yahoo" value="Search in Yahoo" formaction="https://search.yahoo.com/search" onmouseenter="drawTitle(this)" onmouseleave="removeAllStyles()"><img src="images/yahoo.png"></button>
+				<button type="submit" class="duckGo" value="Search in DuckDuckGo" formaction="https://duckduckgo.com/" onmouseenter="drawTitle(this)" onmouseleave="removeAllStyles()"><img src="images/duckgo.png"></button>
+			</div>
+
+
+		</form>
+	</div>
+
+	<script type="text/javascript">
+		
+		var submitForm = function(form) {
+			// Validation
+			if(form.elements[0].value.length == 0) {
+				event.preventDefault();
+				let queryString = document.getElementById("queryString");
+				queryString.style.boxShadow = "0 0 10px red";
+			}
+
+			let queryString = document.getElementById("queryString");
+			let clickedElement = document.activeElement;
+
+			console.log(clickedElement.className)
+
+
+			switch(clickedElement.value) {
+				case 'Search in Google':
+				case 'Search in Mail.ru':
+				case 'Search in DuckDuckGo':
+				queryString.name = "q";
+				break;
+				case 'Search in Yandex':
+				queryString.name = "text";
+				break;
+				case 'Search in Rambler':
+				queryString.name = "query";
+				break;
+				case "Search in Yahoo":
+				queryString.name = "p";
+				break;
+			}
+		};
+
+		var drawTitle = function(button) {
+			let title = document.getElementById("title");
+			let listOfLetters = title.children;
+
+			switch(button.className) {
+				case "google":
+					listOfLetters[0].style.color = "#4285F4";
+					listOfLetters[1].style.color = "#EA4335";
+					listOfLetters[2].style.color = "#FBBC05";
+					listOfLetters[3].style.color = "#4285F4";
+					listOfLetters[4].style.color = "#34A853";
+					listOfLetters[5].style.color = "#EA4335";
+					listOfLetters[6].style.color = "#FBBC05";
+					listOfLetters[7].style.color = "#34A853";
+					break;
+				case "yandex":
+					listOfLetters[0].style.color = "#FF0000";
+					break;
+				case "mail":
+					title.style.background = "#005FF9";
+					listOfLetters[0].style.color = "#FF9E00";
+					fillLetters(1,"#fff");
+					break;
+				case "rambler":
+					title.style.background = "#09AEEF";
+					fillLetters(0,"#fff");
+					break;
+				case "yahoo":
+					fillLetters(0,"#6001D2");
+					break;
+				case "duckGo":
+					fillLetters(0,"#DE4D26");
+					break;
+			}
+		};
+
+		var removeAllStyles = function() {
+			let listOfLetters = document.getElementById("title").children;
+			for(let i = 0; i < listOfLetters.length; i++) {
+				listOfLetters[i].style.color = "";
+			}
+			document.getElementById("title").style.background = "";
+		}
+
+		var fillLetters = function(start,color) {
+			let title = document.getElementById("title");
+			let listOfLetters = title.children;
+			for(let i = start; i < listOfLetters.length; i++) {
+				listOfLetters[i].style.color = color;
+			}
+		}
+
+		let a = [];
+		let b = document.getElementById("title").children;
+		console.log(b[0]);
+
+	</script>
+</body>
+</html>
