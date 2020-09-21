@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Searching service</title>
+	<title>All-In-One</title>
 	<link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
@@ -102,7 +102,7 @@
 				listOfLetters[i].style.color = "";
 			}
 			document.getElementById("title").style.background = "";
-		}
+		};
 
 		var fillLetters = function(start,color) {
 			let title = document.getElementById("title");
@@ -110,11 +110,7 @@
 			for(let i = start; i < listOfLetters.length; i++) {
 				listOfLetters[i].style.color = color;
 			}
-		}
-
-		let a = [];
-		let b = document.getElementById("title").children;
-		console.log(b[0]);
+		};
 
 	</script>
 </body>

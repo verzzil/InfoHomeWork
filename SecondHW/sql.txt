@@ -1,0 +1,176 @@
+1.
+select model, speed, hd from PC where price < 500
+
+2.
+select distinct maker from Product where type = 'Printer'
+
+3.
+select model, ram, screen from Laptop where price > 1000
+
+4.
+select * from Printer where color = 'y'
+
+5.
+select model, speed, hd from PC where (cd = '12x' or cd = '24x') and price < 600
+
+6.
+select distinct p.maker, l.speed from Product p join Laptop l on l.hd >= 10 and p.model = l.model
+
+7.
+select p.model, price from Product p join PC pc on p.model = pc.model where p.maker = 'B'
+union
+select p.model, price from Product p join Laptop lt on p.model = lt.model where p.maker= 'B'
+union
+select p.model, price from Product p join Printer pr on p.model = pr.model where p.maker = 'B'
+
+8.
+select distinct p.maker from Product p
+where p.type = 'PC' and p.maker not in (select prod.maker from Product prod where prod.type = 'Laptop')
+
+9.
+select distinct prod.maker from Product prod 
+where prod.type = 'PC' and prod.model in (select pc.model from PC pc where pc.speed >= 450)
+
+10.
+select model, price from Printer where
+price = (select max(price) from Printer)
+
+11.
+select AVG(speed) from PC
+
+12.
+select AVG(speed) from Laptop where price > 1000
+
+13.
+select AVG(pc.speed) from PC pc
+where pc.model in (select p.model from Product p where p.maker = 'A')
+
+14.
+select s.class, s.name, c.country from Ships s
+join Classes c on s.class = c.class where c.numGuns >= 10
+
+15.
+SELECT DISTINCT hd
+FROM PC GROUP BY (HD) HAVING COUNT(hd)>=2
+
+16.
+SELECT DISTINCT p1.model,p2.model,p1.speed,p1.ram
+FROM PC p1, PC p2
+WHERE p1.speed = p2.speed AND p1.ram = p2.ram AND p1.model > p2.model
+
+17.
+SELECT DISTINCT p.type,l.model,l.speed
+FROM Laptop l
+JOIN Product p ON l.model = p.model
+WHERE l.speed <
+(SELECT min(speed) FROM PC)
+
+18.
+SELECT DISTINCT p.maker, pr.price
+FROM PRINTER pr
+JOIN Product p ON p.model=pr.model
+WHERE pr.color = 'y' AND
+pr.price = 
+(SELECT MIN(price)
+FROM Printer
+where color='y')
+
+19.
+select distinct prod.maker, avg(lap.screen) from Product prod
+join Laptop lap on lap.model = prod.model
+GROUP BY prod.maker
+
+20.
+select maker, count(model) from Product where type = 'PC'
+group by maker
+HAVING COUNT (DISTINCT model) >= 3
+
+21.
+select prod.maker, max(pc.price) from Product prod, PC pc
+where prod.model =  pc.model
+group by prod.maker
+
+22.
+Select speed, avg(price) from PC
+where speed > 600
+group by speed
+
+23.
+Select prod.maker from Product prod
+join PC pc on pc.model = prod.model and pc.speed >= 750
+INTERSECT
+Select prod.maker from Product prod
+join Laptop lap on lap.model = prod.model and lap.speed >= 750
+
+24.
+SELECT model
+FROM (SELECT model, price
+ FROM pc
+ UNION
+ SELECT model, price
+ FROM Laptop
+ UNION
+ SELECT model, price
+ FROM Printer) t1
+WHERE price = (
+ SELECT MAX(price)
+ FROM (SELECT price
+  FROM pc
+  UNION
+  SELECT price
+  FROM Laptop
+  UNION
+  SELECT price
+  FROM Printer) t2)
+
+25.
+select distinct maker from Product where model in 
+(select model from PC where ram in (select min(ram) from PC)) 
+union
+select distinct maker from Product where model in
+(select model from PC where speed in (select max(speed) from PC))
+and model in 
+(select model from PC where ram in (select min(ram) from PC)) 
+intersect select distinct maker from Product where model in (select model from Printer)
+
+26.
+SELECT sum(s.price)/sum(s.kol) as sredn FROM
+(SELECT price,1 as kol FROM pc,product
+ WHERE pc.model=product.model AND product.maker='A'
+UNION all
+ SELECT price,1 as kol FROM laptop,product
+ WHERE laptop.model=product.model AND product.maker='A') as s
+
+27.
+SELECT product.maker, AVG(pc.hd)
+FROM pc, product WHERE product.model = pc.model
+AND product.maker IN ( SELECT DISTINCT maker
+FROM product
+WHERE product.type = 'printer')
+GROUP BY maker
+
+28.
+select count(maker)
+from product
+where maker in
+(
+  Select maker from product
+  group by maker
+  having count(model) = 1
+)
+
+29.
+SELECT t1.point, t1.date, inc, out
+FROM income_o t1 LEFT JOIN outcome_o t2 ON t1.point = t2.point
+AND t1.date = t2.date
+UNION
+SELECT t2.point, t2.date, inc, out
+FROM income_o t1 RIGHT JOIN outcome_o t2 ON t1.point = t2.point
+AND t1.date = t2.date
+
+30.
+select point, date, SUM(sum_out), SUM(sum_inc)
+from( select point, date, SUM(inc) as sum_inc, null as sum_out from Income Group by point, date
+Union
+select point, date, null as sum_inc, SUM(out) as sum_out from Outcome Group by point, date ) as t
+group by point, date order by point

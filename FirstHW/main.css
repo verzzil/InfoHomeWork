@@ -43,6 +43,7 @@ body {
 	align-items: center;
 	justify-content: center;
 	border-radius: 50%;
+	overflow: hidden;
 	/*filter: grayscale(100%);
 	-webkit-filter: grayscale(100%);
 	-moz-filter: grayscale(100%);
