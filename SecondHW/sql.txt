@@ -174,3 +174,9 @@ from( select point, date, SUM(inc) as sum_inc, null as sum_out from Income Group
 Union
 select point, date, null as sum_inc, SUM(out) as sum_out from Outcome Group by point, date ) as t
 group by point, date order by point
+
+
+31.
+Select class, country from Classes
+where bore >= 16
+
