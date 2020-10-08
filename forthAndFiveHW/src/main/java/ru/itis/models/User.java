@@ -5,6 +5,8 @@ public class User {
     private Integer id;
     private String firstName;
     private String lastName;
+    private String password;
+    private Integer age;
 
     public User(Integer id, String firstName, String lastName, Integer age) {
         this.id = id;
@@ -12,9 +14,6 @@ public class User {
         this.lastName = lastName;
         this.age = age;
     }
-
-    private String password;
-    private Integer age;
 
     public User(String firstName, String lastName, String password, Integer age) {
         this.firstName = firstName;

@@ -15,6 +15,7 @@ import java.sql.SQLException;
 
 @WebServlet("/registration")
 public class Registration extends HttpServlet {
+
     private UsersRepositoryImpl usersRepository;
 
     @Override
@@ -29,14 +30,14 @@ public class Registration extends HttpServlet {
             usersRepository = new UsersRepositoryImpl(
                     DriverManager.getConnection(ConnectDB.DB_URL, ConnectDB.DB_USER, ConnectDB.DB_PASSWORD)
             );
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ServletException(e);
         }
     }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/jsp/registration.jsp").forward(req,resp);
+        req.getRequestDispatcher("/jsp/registration.jsp").forward(req, resp);
     }
 
     @Override
@@ -45,12 +46,17 @@ public class Registration extends HttpServlet {
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
         String password = req.getParameter("password");
+        String password_repeat = req.getParameter("password_repeat");
         Integer age = Integer.parseInt(req.getParameter("age").trim());
 
 
-        User newUser = new User(firstName,lastName,password,age);
-        usersRepository.save(newUser);
+        if (password.equals(password_repeat)) {
+            User newUser = new User(firstName, lastName, password, age);
+            usersRepository.save(newUser);
+            resp.sendRedirect("/user-list");
+        } else {
+            resp.sendRedirect("/passwords-do-not-match");
+        }
 
-        resp.sendRedirect("/user-list");
     }
 }

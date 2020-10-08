@@ -5,3 +5,4 @@ ru\itis\servlets\UserList.class
 ru\itis\servlets\Registration.class
 ru\itis\repositiories\UsersRepository.class
 ru\itis\repositiories\UsersRepositoryImpl.class
+ru\itis\servlets\PasswordsDoNotMatch.class

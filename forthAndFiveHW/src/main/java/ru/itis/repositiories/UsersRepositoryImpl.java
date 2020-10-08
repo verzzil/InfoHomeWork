@@ -91,7 +91,7 @@ public class UsersRepositoryImpl implements UsersRepository {
                             entity.getPassword()+"','"+
                             entity.getAge()+
                             "')"+
-                            " ON CONFLICT DO NOTHING"
+                            " ON CONFLICT DO UPDATE"
             );
         } catch (SQLException e) {
             throw new IllegalStateException(e);

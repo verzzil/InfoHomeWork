@@ -13,7 +13,7 @@
            placeholder="Enter your age">
     <input name="password" type="password"
            placeholder="Enter password">
-    <input name="password" type="password"
+    <input name="password_repeat" type="password"
            placeholder="Repeat password">
     <input type="submit" value="Registration">
 </form>
