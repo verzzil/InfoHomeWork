@@ -1,0 +1,7 @@
+ru\itis\consts\ConnectDB.class
+ru\itis\models\User.class
+ru\itis\repositiories\CrudRepository.class
+ru\itis\servlets\UserList.class
+ru\itis\servlets\Registration.class
+ru\itis\repositiories\UsersRepository.class
+ru\itis\repositiories\UsersRepositoryImpl.class
