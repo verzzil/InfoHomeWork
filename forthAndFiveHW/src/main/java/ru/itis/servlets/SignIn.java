@@ -6,15 +6,17 @@ import ru.itis.repositiories.UsersRepositoryImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Optional;
 
-@WebServlet("/registration")
-public class Registration extends HttpServlet {
+@WebServlet("/sign-in")
+public class SignIn extends HttpServlet {
 
     private UsersRepositoryImpl usersRepository;
 
@@ -37,26 +39,31 @@ public class Registration extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/jsp/registration.jsp").forward(req, resp);
+        req.getRequestDispatcher("/jsp/sign-in.jsp").forward(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        String firstName = req.getParameter("firstName");
-        String lastName = req.getParameter("lastName");
+        String login = req.getParameter("login");
         String password = req.getParameter("password");
-        String password_repeat = req.getParameter("password_repeat");
-        Integer age = Integer.parseInt(req.getParameter("age").trim());
 
+        Optional<User> currentUser = usersRepository.findUserByLogin(login);
 
-
-        if (password.equals(password_repeat)) {
-            User newUser = new User(firstName, lastName, password, age);
-            usersRepository.save(newUser);
-            resp.sendRedirect("/user-list");
+        if (currentUser.isPresent()) {
+            if (
+                    currentUser.get().getFirstName().equals(login) &&
+                            currentUser.get().getPassword().equals(password)
+            ) {
+                Cookie cookie = new Cookie("Auth", currentUser.get().getUuid());
+                resp.addCookie(cookie);
+                resp.sendRedirect("/user-list");
+            }
+            else {
+                resp.sendRedirect("/sign-in");
+            }
         } else {
-            resp.sendRedirect("/passwords-do-not-match");
+            resp.sendRedirect("/sign-in");
         }
 
     }

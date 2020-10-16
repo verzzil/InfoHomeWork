@@ -7,6 +7,13 @@ public class User {
     private String lastName;
     private String password;
     private Integer age;
+    private String uuid;
+
+    public User(String firstName, String password, String uuid) {
+        this.firstName = firstName;
+        this.password = password;
+        this.uuid = uuid;
+    }
 
     public User(Integer id, String firstName, String lastName, Integer age) {
         this.id = id;
@@ -60,5 +67,13 @@ public class User {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }

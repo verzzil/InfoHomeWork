@@ -785,7 +785,7 @@ false Z
 false Zulu
 true posixrules
 </TimeZones>
-      <StartupTime>1601476732</StartupTime>
+      <StartupTime>1602787763</StartupTime>
     </root>
     <database id="2" parent="1" name="11-906">
       <ObjectId>24576</ObjectId>
@@ -795,7 +795,7 @@ true posixrules
       <ObjectId>13318</ObjectId>
       <Comment>default administrative connection database</Comment>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>616</IntrospectionStateNumber>
+      <IntrospectionStateNumber>623</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|32823|32825|1
 </Relations>
@@ -857,7 +857,7 @@ true posixrules
       <Comment>standard public schema</Comment>
       <StateNumber>276</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>617</IntrospectionStateNumber>
+      <IntrospectionStateNumber>624</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="18" parent="3" name="heap">
@@ -950,7 +950,7 @@ true posixrules
     <table id="33" parent="17" name="users">
       <ObjectId>32825</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>610</StateNumber>
+      <StateNumber>622</StateNumber>
     </table>
     <column id="34" parent="33" name="id">
       <Position>1</Position>
@@ -988,14 +988,20 @@ true posixrules
       <StateNumber>610</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="39" parent="33" name="users_pkey">
+    <column id="39" parent="33" name="uuid">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>622</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="40" parent="33" name="users_pkey">
       <ObjectId>32829</ObjectId>
       <StateNumber>610</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="40" parent="33" name="users_pkey">
+    <key id="41" parent="33" name="users_pkey">
       <ObjectId>32830</ObjectId>
       <StateNumber>610</StateNumber>
       <ColNames>id</ColNames>
